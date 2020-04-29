@@ -110,7 +110,7 @@
   }
 
   function checkIfOperator(entry) {
-    return entry === "+" || entry === "-" || entry === "x" || entry === "%";
+    return entry === "+" || entry === "-" || entry === "x" || entry === "÷";
   }
 
   function clearDisplay() {
@@ -124,7 +124,7 @@
   }
 
   function checkIfHasPrimary(exp) {
-    return /(\d+)(\x|%)(\d+)/.test(exp);
+    return /(\d+)(\x|÷)(\d+)/.test(exp);
   }
 
   function checkIfHasSecondary(exp) {
@@ -136,7 +136,7 @@
       var myExp = exp;
       while (checkIfHasPrimary(myExp)) {
         myExp = myExp.replace(
-          /(\d+)(\x|%)(\d+)/g,
+          /(\d+)(\x|÷)(\d+)/g,
           function (match, n1, op, n2) {
             return makeOperation(op)(n1, n2);
           });
@@ -161,7 +161,7 @@
       'x': function (x, y) {
         return x * y;
       },
-      '%': function (x, y) {
+      '÷': function (x, y) {
         return x / y;
       },
       '+': function (x, y) {
